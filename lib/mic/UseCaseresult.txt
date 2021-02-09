@@ -1,0 +1,2 @@
+windows10 	--- OK
+raspberrypi3B+	--- OK, but response is too late.

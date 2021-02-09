@@ -1,0 +1,7 @@
+
+*윈도우,626와 다른점
+
+-USB LCD 출력은 framebuffer1를 사용
+-raspberry pi의 기본 위치는 /home/user/이다. run command를 변경
+-실행 시 python3 ~.py로 실행
+-LCD 테스트 시 livot-setup/misc/~~.mp4 가 필요
