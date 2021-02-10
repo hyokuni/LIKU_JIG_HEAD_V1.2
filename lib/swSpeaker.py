@@ -16,7 +16,9 @@ runSpeaker_CMD = "mplayer -nolirc -nosound -fs -fps 30 -vo fbdev:/dev/fb1 /home/
 runSpeaker_CMD = "aplay -D plughw:$card_num,0 /home/user/docker/livot-setup/misc/voice_mono_48000Hz_16bit_PCM.wav"
 CARD_NUM = 'plughw:9,0'
 #SOUND_SRC_PATH = '/home/user/docker/livot-setup/misc/voice_mono_48000Hz_16bit_PCM.wav'
-SOUND_SRC_PATH = '/home/user/Downloads/organfinale.wav'
+#SOUND_SRC_PATH = '/home/user/Downloads/organfinale.wav'
+SOUND_SRC_PATH = '/home/user/Downloads/sonic_extralife.wav'
+
 TOROOC_SPK_USB_ID = '0483:5741'
 
 class swSpeaker(threading.Thread):

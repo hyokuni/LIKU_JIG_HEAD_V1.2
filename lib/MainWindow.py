@@ -9,6 +9,7 @@ from lib.swLCD import swLCD
 from lib.swSpeaker import swSpeaker
 from lib.swCamera import swCamera
 from lib.swMIC import swMIC
+from lib.swMotor import swMotor
 
 
 class MainWindow(QMainWindow):
@@ -108,10 +109,15 @@ class MainWindow(QMainWindow):
     def initLabel(self):
         pass
     
+    #def onBtnStartClicked(self):
+    #    motor = swMotor()
+    #    motor.start()
+    
     def onBtnStartClicked(self):
         texttmp=""
         texttmp = self.lbCAM.text()
         self.lbCAM.setText(texttmp+">>>>> Pass")
+        self.lbCAM.setStyleSheet("Color:green")
         self.lbCAM.repaint()
 
         #mic start, label display
@@ -145,6 +151,7 @@ class MainWindow(QMainWindow):
         
         #LCD finish
         self.lbLCD.setText(self.lbLCD.text()+">>> OK")
+        self.lbLCD.setStyleSheet("Color:green")
         self.lbLCD.repaint()
         
         #Speaker start, label display
@@ -158,6 +165,7 @@ class MainWindow(QMainWindow):
         
         #SPK finish
         self.lbSPK.setText(self.lbSPK.text()+">>> OK")
+        self.lbSPK.setStyleSheet("Color:green")
         self.lbSPK.repaint()
 
 
@@ -202,6 +210,4 @@ class MainWindow(QMainWindow):
         super().show()
         
 if __name__ == '__main__':
-    app = Qd
-    app = MainWindow()
-    
+    print("use external call")
