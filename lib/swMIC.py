@@ -14,6 +14,7 @@ class swMIC(threading.Thread):
         self.count =0
         self.flagRun =0
         self._return = None
+        self._nopen = None
         
     def initMIC(self):
         pass
@@ -66,6 +67,10 @@ class swMIC(threading.Thread):
             p=pyaudio.PyAudio()
             info = p.get_host_api_info_by_index(0)
             numdevices = info.get('deviceCount')
+            
+            #dummy
+            #stream=p.open()
+            
             for i in range(0, numdevices):
                 if (p.get_device_info_by_host_api_device_index(0, i).get('maxInputChannels')) > 0:
                     print("Input Device id ", i, " - ", p.get_device_info_by_host_api_device_index(0, i).get('name'))
@@ -83,7 +88,10 @@ class swMIC(threading.Thread):
                         self.torooc_device_index = i
                         #print('torooc index number:',self.torooc_device_index)
                         #print(type(self.torooc_device_index))
-                    
+                    else:
+                        print('error find LIKU Audio')
+                        self._nopen = -1
+                        self._return = 11           
        
             stream=p.open(format=pyaudio.paInt16,channels=4,rate=RATE,input=True,
                           input_device_index=self.torooc_device_index,frames_per_buffer=CHUNK)
@@ -158,13 +166,17 @@ class swMIC(threading.Thread):
                     break
 
             self.test_result(11,peakthdMIC1)
+        except:
+            print('except')
         finally:
-            if stream is not None:
-                stream.close()
-            if p is not None:
-                #p.terminate()
-                pass
-            time.sleep(1)
+            print('finally')
+            if(self._nopen == None):
+                if stream is not None:
+                    stream.close()
+                if p is not None:
+                    #p.terminate()
+                    pass
+                time.sleep(1)
             
         #stream.stop_stream()
         #stream.close()
@@ -173,6 +185,7 @@ class swMIC(threading.Thread):
 
     def join(self,*args):
         threading.Thread.join(self)
+        print(self._return)
         return self._return
 
 

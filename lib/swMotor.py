@@ -99,16 +99,20 @@ class swMotor(threading.Thread):
             print('connection check-no13')
             if self.ser.ping(13) == 1:
                 print('motor13 response ok')
+                self._return = 22
             else:
                 print('motor13 response fail')
+                self._return = 11
                 return -1
 
             #motor check 14
             print('connection check-no13')
             if self.ser.ping(14) == 1:
                 print('motor14 response ok')
+                self._return = 22
             else:
                 print('motor14 response fail')
+                self._return = 11
                 return -1
 
             print('set cset')
