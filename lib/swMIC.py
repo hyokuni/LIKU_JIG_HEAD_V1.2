@@ -4,6 +4,9 @@ import threading
 import time
 
 # 5sec run, peak count, and result return
+THD_MIC_COUNT = 11
+RETURN_PASS = 22
+RETURN_FAIL = 11
 
 class swMIC(threading.Thread):
     def __init__(self):
@@ -44,7 +47,7 @@ class swMIC(threading.Thread):
         #print(newArr)
         return newArr
 
-    #
+    #obslate
     def test_result(self,target,maxi_count):
         if(target > maxi_count):
             print("fail mic test")
@@ -52,6 +55,19 @@ class swMIC(threading.Thread):
         else:
             print("OK mic test")
             self._return = 22
+    
+    #brand new
+    def test_result_each(self,target,maxi_count,dnum):
+        if(target > maxi_count):
+            print("fail mic test:",str(dnum))
+            rvalue = 1 <<(dnum-1)
+            print("rvalue:",str(rvalue))
+            return rvalue
+            #return dnum
+            
+        else:
+            print("OK mic test:",str(dnum))
+            return 0
             
     def run(self):
         self.startTimer()
@@ -88,11 +104,15 @@ class swMIC(threading.Thread):
                         self.torooc_device_index = i
                         #print('torooc index number:',self.torooc_device_index)
                         #print(type(self.torooc_device_index))
-                    else:
-                        print('error find LIKU Audio')
-                        self._nopen = -1
-                        self._return = 11           
+                    #else:
+                    #    print('error find LIKU Audio')
+                    #    self._nopen = -1
+                    #    self._return = 11           
        
+            if not self.torooc_device_index:
+                self._nopen = -1
+                self._return = 15
+                
             stream=p.open(format=pyaudio.paInt16,channels=4,rate=RATE,input=True,
                           input_device_index=self.torooc_device_index,frames_per_buffer=CHUNK)
 
@@ -164,8 +184,37 @@ class swMIC(threading.Thread):
                 if self.flagRun:
                     print('flag out')
                     break
-
-            self.test_result(11,peakthdMIC1)
+            #old
+            #self.test_result(11,peakthdMIC1)
+            
+            #new
+            global THD_MIC_COUNT
+            print(THD_MIC_COUNT)
+            print(peakthdMIC1)
+            print(peakthdMIC2)
+            print(peakthdMIC3)
+            print(peakthdMIC4)
+            print("----")
+            
+            err_mic = 0
+            err_mic = err_mic + self.test_result_each(THD_MIC_COUNT,peakthdMIC1,1) #mic1
+            err_mic = err_mic + self.test_result_each(THD_MIC_COUNT,peakthdMIC2,2) #mic2
+            err_mic = err_mic + self.test_result_each(THD_MIC_COUNT,peakthdMIC3,3) #mic3
+            err_mic = err_mic + self.test_result_each(THD_MIC_COUNT,peakthdMIC4,4) #mic4
+            
+            print("err_mic result:",str(err_mic))
+            
+            #return result
+            global RETURN_PASS
+            
+            if err_mic == 0:
+                self._return = RETURN_PASS
+            else:
+                self._return = err_mic
+            
+            print('return value:',str(self._return))
+            
+            
         except:
             print('except')
         finally:

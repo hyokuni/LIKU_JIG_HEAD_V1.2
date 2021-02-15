@@ -108,9 +108,33 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(centralWidget)
     
     def initLabel(self):
-        pass
+        #
+        self.lbCAM.setText("CAMERA")
+        self.lbCAM.setStyleSheet("Color:black")
+        self.lbCAM.repaint()
+        #
+        self.lbMIC.setText("MIC")
+        self.lbMIC.setStyleSheet("Color:black")
+        self.lbMIC.repaint()
+        #
+        self.lbLCD.setText("LCD")
+        self.lbLCD.setStyleSheet("Color:black")
+        self.lbLCD.repaint()
+        #
+        self.lbSPK.setText("SPEAKER")
+        self.lbSPK.setStyleSheet("Color:black")
+        self.lbSPK.repaint()
+        #
+        self.lbMO_HRoll.setText("HEAD13(roll)")
+        self.lbMO_HRoll.setStyleSheet("Color:black")
+        self.lbMO_HRoll.repaint()        
+        #
+        self.lbMO_HPitch.setText("HEAD14(pitch)")
+        self.lbMO_HPitch.setStyleSheet("Color:black")
+        self.lbMO_HPitch.repaint()
  
     def onBtnStartClicked(self):
+        self.initLabel()
         
         texttmp=""
         texttmp = self.lbCAM.text()
@@ -144,7 +168,16 @@ class MainWindow(QMainWindow):
             self.lbMIC.setStyleSheet("Color:green")
         else:
             self.lbMIC.setText("mic result fail")
+            
+            #add mic
+            for i in range(0,4):
+                if(micTestResult>>i&1):
+                    print('mic number:',str(i+1))
+                    self.lbMIC.setText(self.lbMIC.text()+','+str(i+1))            
+            
             self.lbMIC.setStyleSheet("Color:red")
+        self.lbMIC.repaint()
+        
 
         #LCD start, label display
         texttmp=""
