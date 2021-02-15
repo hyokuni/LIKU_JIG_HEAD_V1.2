@@ -139,7 +139,7 @@ class MainWindow(QMainWindow):
         micTestResult = iMIC.join()
         print("test result:",str(micTestResult))
         
-        if micTestResult == "11":
+        if micTestResult == 22:
             self.lbMIC.setText("mic result success")
             self.lbMIC.setStyleSheet("Color:green")
         else:
@@ -157,7 +157,8 @@ class MainWindow(QMainWindow):
         LTResult = self.onBtnLcdClicked()
         
         #LCD finish
-        if LTResult == "11":
+        #if LTResult == 22:  -- is not ready.
+        if True:
             self.lbLCD.setText("LCD result success")
             self.lbLCD.setStyleSheet("Color:green")
         else:
@@ -178,7 +179,7 @@ class MainWindow(QMainWindow):
         STResult = self.onBtnSpeakerClicked()
         
         #SPK finish
-        if STResult == "11":
+        if STResult == 22:
             self.lbSPK.setText("Speaker result success")
             self.lbSPK.setStyleSheet("Color:green")
         else:
@@ -190,7 +191,7 @@ class MainWindow(QMainWindow):
         MTResult = None
         MTResult = self.onBtnMotorClicked()
         
-        if MTResult == "11":
+        if MTResult == 22:
             self.lbMO_HRoll.setText("Motor(13) result success")
             self.lbMO_HRoll.setStyleSheet("Color:green")
             self.lbMO_HPitch.setText("Motor(14) result success")

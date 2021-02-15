@@ -78,13 +78,13 @@ class swSpeaker(threading.Thread):
             #playback sound ok
             if not strresult.find('Playing WAVE') == -1:
                 print('pass')
-                self._return = 11
+                self._return = 22
             else:
                 self._return = None
         else:
             print('error')
             #return 22
-            self._return = 22
+            self._return = 11
 
     def join(self,*args):
         threading.Thread.join(self)
