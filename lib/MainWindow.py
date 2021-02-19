@@ -10,7 +10,7 @@ from lib.swSpeaker import swSpeaker
 from lib.swCamera import swCamera
 from lib.swMIC import swMIC
 from lib.swMotor import swMotor
-
+import time
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -138,7 +138,7 @@ class MainWindow(QMainWindow):
         
         texttmp=""
         texttmp = self.lbCAM.text()
-        self.lbCAM.setText(texttmp+">>>>> Processing")
+        self.lbCAM.setText(texttmp+">>> Processing")
         self.lbCAM.repaint()
         
         #cam test
@@ -146,14 +146,16 @@ class MainWindow(QMainWindow):
         
         texttmp=""
         texttmp = self.lbCAM.text()
-        self.lbCAM.setText(texttmp+">>>>> Pass")
+        self.lbCAM.setText(texttmp+">>> Pass")
         self.lbCAM.setStyleSheet("Color:green")
         self.lbCAM.repaint()
+
+        time.sleep(2)
 
         #mic start, label display
         texttmp=""
         texttmp = self.lbMIC.text()
-        self.lbMIC.setText(texttmp+">>>>> Processing")
+        self.lbMIC.setText(texttmp+">>> Processing")
         self.lbMIC.repaint()
         
         #mic test run
@@ -182,7 +184,7 @@ class MainWindow(QMainWindow):
         #LCD start, label display
         texttmp=""
         texttmp = self.lbLCD.text()
-        self.lbLCD.setText(texttmp+">>>>> Processing")
+        self.lbLCD.setText(texttmp+">>> Processing")
         self.lbLCD.repaint()
         
         LTResult = None
@@ -204,7 +206,7 @@ class MainWindow(QMainWindow):
         #Speaker start, label display
         texttmp=""
         texttmp = self.lbSPK.text()
-        self.lbSPK.setText(texttmp+">>>>>> Processing")
+        self.lbSPK.setText(texttmp+">>> Processing")
         self.lbSPK.repaint()
         
         #SPK test run

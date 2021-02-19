@@ -116,8 +116,8 @@ class swMotor(threading.Thread):
                 return -1
 
             print('set cset')
-            #self.ser.csetnow(11)
-            #self.ser.csetnow(12)
+            self.ser.csetnow(13)
+            self.ser.csetnow(14)
                         
             print('move no13-low')
             print('check angle, and goal compare')
@@ -125,6 +125,10 @@ class swMotor(threading.Thread):
             
             print('move no13-high')
             print('check angle, and goal compare')
+            
+            #center position
+            self.th_motor_move(13,2048,200,15,1)
+            
             
             print('move no14-low')
             print('check angle, and goal compare')
